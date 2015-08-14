@@ -33,20 +33,17 @@ void bfs(int root)
 	dis[root] = 0;
 	fa[root][0] = root;//root's 2^0 father is root
 	que.push(root);
-	//q[0] = root;
-	//int head = 0,tail = 1;
 	while (!que.empty())
 	{
-		//int u = q[head++];
 		int u = que.front();que.pop();
-		for (int i = 1; i < DEG; i++)/*the father from 2^1 ~ 2^DEG*/fa[u][i] = fa[fa[u][i-1]][i-1];//u's 2^i father is u's (2^(i-1))^(i-1)
+		for (int i = 1; i < DEG; i++)/*the father from 2^1 ~ 2^DEG*/
+		fa[u][i] = fa[fa[u][i-1]][i-1];//u's 2^i father is u's (2^(i-1))^(i-1)
 		for (int e = first[u]; e != -1; e = a[e].next)
 		{
 			int v = a[e].v;
 			if (v == fa[u][0])continue;//if u's father is v,continue, it can't vis his fahter
 			dis[v] = dis[u] + 1;
 			fa[v][0] = u;
-			//q[++tail] = v;
 			que.push(v);
 		}
 	}
